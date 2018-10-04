@@ -1,0 +1,20 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ asset('assets/css/navbar.css') }}" />
+</head>
+<body>
+
+<h1>The Genus  {{ name }}</h1>
+<div id="menu">
+    {% include('navbar.html.twig') %}
+</div>
+<div id="display_div">
+    {% if type == "perso" %}
+        {% include('perso.html.twig') %}
+    {% elseif type == "test" %}
+    {% endif %}
+</div>
+</body>
+
+</html>

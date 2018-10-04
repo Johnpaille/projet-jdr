@@ -1,0 +1,35 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 15%;
+    background-color: #f1f1f1;
+    height: 100%; /* Full height */
+    position: fixed; /* Make it stick, even on scroll */
+    overflow: auto; /* Enable scrolling if the sidenav has too much content */
+}
+
+li {
+    padding: 15px;
+}
+
+li:hover {
+    background-color: #AAAAAA;
+}
+
+body {
+    background-color: #f1f1f1;
+}
+
+#menu {
+    display: block;
+}
+
+#display_div {
+    position: relative;
+    display: block;
+    left:15%;
+    width:50%;
+    background-color: #6b9311;
+    border:solid;
+}

@@ -18,13 +18,16 @@ use Symfony\Component\Templating\Loader\FilesystemLoader;
 
 class GeniousController extends Controller {
     /**
-     * @Route("/genus/{genusName}")
+     * @Route("{genusName}")
      */
     public function showAction($genusName){
         $templating = $this->container->get('templating');
-        $html = $templating->render('genus/show.html.twig', [
-            'name' => $genusName
+        $html = $templating->render('show.html.twig', [
+            'name' => $genusName,
+            'type' => "test"
         ]);
         return new Response($html);
     }
+
+
 }
