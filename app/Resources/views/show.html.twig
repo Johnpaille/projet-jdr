@@ -10,9 +10,11 @@
     {% include('navbar.html.twig') %}
 </div>
 <div id="display_div">
-    {% if type == "perso" %}
+    {% if type == "character" %}
+        {{ dump() }}
         {% include('perso.html.twig') %}
-    {% elseif type == "test" %}
+    {% elseif type == "newCharacter" %}
+        {% include('newperso.html.twig') %}
     {% endif %}
 </div>
 </body>
