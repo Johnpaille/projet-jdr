@@ -11,10 +11,13 @@
 </div>
 <div id="display_div">
     {% if type == "character" %}
-        {{ dump() }}
         {% include('perso.html.twig') %}
+    {% elseif type == "showCharacter" %}
+        {% include('persodetail.html.twig') %}
     {% elseif type == "newCharacter" %}
         {% include('newperso.html.twig') %}
+    {% elseif type == "editCharacter" %}
+        {% include('persoedit.html.twig') %}
     {% endif %}
 </div>
 </body>

@@ -22,8 +22,8 @@ class CharacterController extends Controller
      * @Route("perso")
      */
     public function showAction(){
-        $templating = $this->container->get('templating');
         $aPersos = CharacterController::getCharacters();
+        $templating = $this->container->get('templating');
         $html = $templating->render('show.html.twig', [
             'name' => "persos",
             'type' => "character",
@@ -36,6 +36,51 @@ class CharacterController extends Controller
     public function getCharacters(){
         $em = $this->getDoctrine()->getManager();
         $qry = "SELECT * FROM personnage";
+        $statement = $em->getConnection()->prepare($qry);
+        $statement->bindValue("status", 1);
+        $statement->execute();
+        $res = $statement->fetchAll();
+        return $res;
+    }
+
+    // Affiche les détails d'un personnage
+    /**
+     * @Route("perso/{id}")
+     */
+    public function showCharacter($id) {
+        $perso = CharacterController::getCharacter($id);
+        $templating = $this->container->get('templating');
+        if(isset($_POST["validForm"]) && $_POST["validForm"] == 1){
+            
+        }
+        $html = $templating->render('show.html.twig', [
+            'name' => "perso",
+            'type' => "showCharacter",
+            'perso' => $perso[0]
+        ]);
+        return new Response($html);
+    }
+
+    // Affiche la page de modification d'un personnage
+    /**
+     * @Route("perso/{id}/edit")
+     */
+    public function showEditCharacter($id) {
+        $perso = CharacterController::getCharacter($id);
+        $templating = $this->container->get('templating');
+        $html = $templating->render('show.html.twig', [
+            'name' => "perso",
+            'type' => "editCharacter",
+            'perso' => $perso[0]
+        ]);
+        return new Response($html);
+    }
+
+
+    // Récupération d'un personnage
+    public function getCharacter($id){
+        $em = $this->getDoctrine()->getManager();
+        $qry = "SELECT * FROM personnage WHERE id = ".$id;
         $statement = $em->getConnection()->prepare($qry);
         $statement->bindValue("status", 1);
         $statement->execute();
@@ -56,7 +101,7 @@ class CharacterController extends Controller
         ]);
 
         if(isset($_GET["nom"]) && $_GET["nom"] != ""){
-            $this->addCharacter($_GET);
+            $this->insertCharacter($_GET);
         } elseif(isset($_GET["nom"]) && $_GET["nom"] == "") {
             echo "Erreur lors de l'ajout d'un nouveau personnage";
         }
@@ -64,7 +109,8 @@ class CharacterController extends Controller
         return new Response($html);
     }
 
-    public function addCharacter($aPerso){
+    // Insert du nouveau personnage
+    public function insertCharacter($aPerso){
         $em = $this->getDoctrine()->getManager();
         $qry = "INSERT INTO personnage VALUES ('',
           '" . $_GET["nom"] . "',
@@ -89,6 +135,8 @@ class CharacterController extends Controller
         $statement = $em->getConnection()->prepare($qry);
         $statement->bindValue("status", 1);
         $statement->execute();
-//        $res = $statement->fetchAll();
     }
+    
+    // Update du personnage
+    
 }

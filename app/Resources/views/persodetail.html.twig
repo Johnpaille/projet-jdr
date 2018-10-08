@@ -1,0 +1,12 @@
+{{ dump() }}
+<h1>{{ perso.nom }} {{ perso.prenom }}</h1>
+<input type="button" onclick="location.href='/perso/1/edit'" value ='Modifier'/>
+<div>
+    <table>
+            {% for carac, value in perso %}
+                <tr>
+                    <td>{{ carac }}</td><td>{{ value }}</td>
+                </tr>
+            {% endfor %}
+    </table>
+</div>

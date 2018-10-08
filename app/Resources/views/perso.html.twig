@@ -1,7 +1,10 @@
 <h1>Personnages</h1>
 <div>
+        <a href="/perso/new">Nouveau personnage</a><br />
     {% for perso in persos %}
-        <label>{{ perso.nom }}</label>
-        <label>{{ perso.prenom }}</label>
+        <p onclick="location.href='/perso/{{ perso.id }}'">
+                <label>{{ perso.nom }}</label>
+                <label>{{ perso.prenom }}</label>
+        </p>
     {% endfor %}
 </div>

@@ -1,0 +1,18 @@
+{{ dump() }}
+<h1>Modification de {{ perso.nom }} {{ perso.prenom }}</h1>
+<div>
+    <form method="POST" action="/perso/{{ perso.id }}">
+        <input type="hidden" value="1" id="formValid" name="formValid"/>
+        <input type="hidden" value="{{ perso.id }}" id="idPerso" name="idPerso"/>
+        <table>
+            {% for carac, value in perso %}
+                {% if(carac != "id") %}
+                    <tr>
+                        <td>{{ carac|upper }}</td><td><input type="text" value="{{ value }}" id="{{ carac }}" name="{{ carac }}"></td>
+                    </tr>
+                {%  endif %}
+            {% endfor %}
+        </table>
+        <input type="submit">
+    </form>
+</div>
